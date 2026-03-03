@@ -1,0 +1,64 @@
+/*
+ * Author: [Your Name]
+ * Student ID: [Your ID]
+ * Date: [Current Date]
+ * Description: Customer Bill Calculator using arrays
+ */
+
+#include <stdio.h>
+
+#define NUM_PRODUCTS 5
+#define TAX_RATE 0.0835
+
+int main() {
+    // Product information
+    char *products[] = {"TV", "Monitor", "Flash Drive", "Hard Drive", "Deskjet Printer"};
+    float prices[] = {400.00, 220.00, 35.20, 150.00, 300.00};
+    
+    int quantities[NUM_PRODUCTS];
+    float totals[NUM_PRODUCTS];
+    float subtotal = 0, tax_amount, total_bill;
+    int i;
+    
+    // Display header
+    printf("============================================\n");
+    printf("     CUSTOMER BILL CALCULATION SYSTEM\n");
+    printf("============================================\n\n");
+    
+    // Get quantities for each product
+    for(i = 0; i < NUM_PRODUCTS; i++) {
+        printf("How Many %s Were Sold? ", products[i]);
+        scanf("%d", &quantities[i]);
+    }
+    
+    // Calculate totals and subtotal
+    for(i = 0; i < NUM_PRODUCTS; i++) {
+        totals[i] = quantities[i] * prices[i];
+        subtotal += totals[i];
+    }
+    
+    // Calculate tax and total
+    tax_amount = subtotal * TAX_RATE;
+    total_bill = subtotal + tax_amount;
+    
+    // Display bill
+    printf("\n\n");
+    printf("========================================================\n");
+    printf("                    CUSTOMER BILL\n");
+    printf("========================================================\n");
+    printf("QTY   DESCRIPTION        UNIT PRICE    TOTAL PRICE\n");
+    printf("========================================================\n");
+    
+    for(i = 0; i < NUM_PRODUCTS; i++) {
+        printf("%-5d %-18s %10.2f %12.2f\n", 
+               quantities[i], products[i], prices[i], totals[i]);
+    }
+    
+    printf("========================================================\n");
+    printf("%44s %12.2f\n", "Subtotal:", subtotal);
+    printf("%44s %12.2f\n", "Tax (8.35%):", tax_amount);
+    printf("%44s %12.2f\n", "Total:", total_bill);
+    printf("========================================================\n");
+    
+    return 0;
+}
